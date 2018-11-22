@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <style>
+        html,
+        body {
+            background: #000;
+        }
+    </style>
+
+    <script>
+
+        function playerPlay() {
+
+            let selectionIsCorrect;
+
+            while (!selectionIsCorrect) {
+                selection = prompt('Rock, paper or scissors?');
+                selection = selection.toLowerCase();
+
+                if (selection == 'r' || selection == 'rock') {
+                    selection = 'Rock';
+                } else if (selection == 'p' || selection == 'paper') {
+                    selection = 'Paper';
+                } else if (selection == 's' || selection == 'scissors') {
+                    selection = 'Scissors';
+                } else {
+                    selectionIsCorrect = false;
+                    alert('Try again.');
+                    continue;
+                }
+
+                selectionIsCorrect = true;
+            }
+
+            return selection;
+        }
+
+        function computerPlay() {
+            let randomInt = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+            if (randomInt == 1) {
+                return 'rock';
+            } else if (randomInt == 2) {
+                return 'paper';
+            } else {
+                return 'scissors';
+            }
+        }
+
+        function playRound(playerSelection, computerSelection) {
+
+            let whoWins;
+
+            if (playerSelection == 'Rock') {
+
+                if (computerSelection == 'rock') {
+                    whoWins = 'tie';
+                } else if (computerSelection == 'paper') {
+                    whoWins = 'computer';
+                } else {
+                    whoWins = 'player';
+                }
+
+            } else if (playerSelection == 'Paper') {
+
+                if (computerSelection == 'rock') {
+                    whoWins = 'player';
+                } else if (computerSelection == 'paper') {
+                    whoWins = 'tie';
+                } else {
+                    whoWins = 'computer';
+                }
+
+            } else {
+
+                if (computerSelection == 'rock') {
+                    whoWins = 'computer';
+                } else if (computerSelection == 'paper') {
+                    whoWins = 'player';
+                } else {
+                    whoWins = 'tie';
+                }
+
+            }
+
+            return whoWins;
+        }
+
+
+        function game() {
+
+            let playerScore = 0;
+            let computerScore = 0;
+            let tieScore = 0;
+
+            for (i = 0; i < 5; i++) {
+                let playerSelection = playerPlay();
+                let computerSelection = computerPlay();
+                let whoWins = playRound(playerSelection, computerSelection);
+                let message;
+
+                if (whoWins == 'player') {
+                    playerScore++;
+                    message = 'You WIN this round!';
+                } else if (whoWins == 'computer') {
+                    computerScore++;
+                    message = 'You LOSE this round!';
+                } else {
+                    tieScore++;
+                    message = 'It\'s a tie.';
+                }
+
+                console.log(playerSelection + " vs. " + computerSelection + ". " + message);
+                console.log('– Your score: ' + playerScore);
+                console.log('– Computer\'s score: ' + computerScore);
+                console.log('– Number of ties: ' + tieScore + '\n');
+                console.log('');
+            }
+
+            let finalMessage;
+
+            if (playerScore > computerScore) {
+                finalMessage = 'You WIN THE GAME! Congratulations! :)';
+            } else if (computerScore > playerScore) {
+                finalMessage = '...computer wins, you lose... :(';
+            } else {
+                finalMessage = 'The game is a tie.';
+            }
+
+            console.log(finalMessage);
+
+        }
+
+
+        game();
+
+        console.log();
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
